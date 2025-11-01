@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+-<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Shahla TV Portfolio</title>
@@ -141,7 +141,7 @@
 	      	<div class="overlay"></div>
 	         <div class="container">
 	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(/images/mainimg.jpg);">
+	          	<div class="one-third js-fullheight order-md-last img-fluid mt-5" style="background-image:url('images/mainimg.jpg');">
 	          	 <div class="overlay"></div>
 	          	</div>
 		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
@@ -187,7 +187,7 @@
 
 						<br>
 						<br>
-			            <h2>A junior Softwear Developer</h2>
+			            <h2>A junior Software Developer</h2>
 						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
 						<!-- <br> -->
 			            <p><a href="https://github.com/shahlatv" class="btn btn-warning btn-outline-white py-3 px-4">My works</a></p>
@@ -219,7 +219,7 @@
 									<div class="col-sm-6 col-md-7">
 									  <div class="about-info">
 										<p><span class="title-s">Name: </span> <span>ShahlaTV</span></p>
-										<p><span class="title-s">Job Role: </span> <span>Junior Softwear Developer</span></p>
+										<p><span class="title-s">Job Role: </span> <span>Junior Software Developer</span></p>
 										<p><span class="title-s">Experience: </span> <span>1 year</span></p>
 										<p><span class="title-s">Address: </span> <span>Kerala, India</span></p>
 									  </div>
@@ -263,7 +263,7 @@
 								<h1 class="big">About</h1>
 								<h2 class="mb-4">About Me</h2>
 								
-								<p>With over 1 year of comprehensive experience in the field of Softwear development, accompanied by a bachelor's degree in Computer Application. 
+								<p>With over 1 year of comprehensive experience in the field of Software development, accompanied by a bachelor's degree in Computer Application. 
 									Proficient in MERN &amp; machine learning. 
 									Demonstrated success in leading impactful projects and providing effective mentorship.</p>
 								<ul class="about-info mt-4 px-md-0 px-2">
@@ -317,7 +317,7 @@
 				<div class="col-md-12">
 					<div class="resume-wrap ftco-animate">
 						<span class="date">2025-Present</span>
-						<h2>Junior Softwear Developer</h2>
+						<h2>Junior Software Developer</h2>
 						<span class="position">Microsoft</span>
 						<p class="mt-4">Microsoft ,American multinational technology company founded by Bill Gates and Paul Allen in
 							<ul>
@@ -513,6 +513,29 @@
    </div>
  </section>
 
+   <div class="container mt-5">
+	<h1>ENQUIRIES</h1>
+	<form  class="row g-3" name="form1" method="post" onsubmit="return validate(event)">
+	<div class="col-md-6">
+		<label for="">Username:</label>
+		<input type="text" class="form-control" name="username" id="username">
+	</div>
+	<div class="col-md-6">
+	  	<label for="">Email:</label>
+		<input type="email" class="form-control" name="email" id="email">
+	</div>
+	
+	<div class="col-md-12">
+		<label for="comments" class="form-label">Comments,Questions?</label>
+         <textarea class="form-control" id="comments" rows="3"></textarea>
+	</div>
+	<div class="col-md-12 py-3 px-5 justify-content-center">
+		<button type="submit" class="btn btn-primary py-3 px-5 " >Submit</button>
+	</div>
+      </form>
+   </div>
+
+
 
  
 	
@@ -548,6 +571,43 @@
   <script src="js/scrollax.min.js"></script>
   
   <script src="js/main.js"></script>
+
+  <script>
+	function validate(){
+		event.preventDefault();
+
+		var username=document.getElementById("username").value.trim();
+	    var email=document.getElementById("email").value.trim();
+		var comments=document.getElementById("comments").value.trim();
+		
+        
+		if(username===""||username==null){
+			alert("Must have a username");
+			document.form1.username.focus();
+			return false;
+		}
+		 if(email===""){
+			alert("Must have an Email ID");
+			document.form1.email.focus();
+			return false;
+		 }
+		  var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/i;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid Email ID (must include @ and .com)");
+        document.getElementById("email").focus();
+        return false;
+    }
+      if(comments===""){
+			alert("Please Enter a Message");
+			document.form1.comments.focus();
+			return false;
+		}
+		
+    alert("Form submitted successfully!");
+	document.form1.reset();
+		return false;
+	}
+  </script>
     
   </body>
 </html>
