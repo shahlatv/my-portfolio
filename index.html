@@ -524,27 +524,25 @@
  </section>
 
    <div class="container mt-5">
-	<h1>ENQUIRIES</h1>
-	<form name="gform" onsubmit="return validate(event)">
+  <h1>ENQUIRIES</h1>
+  <form name="gform" id="contact-form" onsubmit="return validate(event)">
     <div class="col-md-6">
-		<label for="">Username:</label>
-		<input type="text" class="form-control" name="username" id="username">
-	</div>
-	<div class="col-md-6">
-	  	<label for="">Email:</label>
-		<input type="email" class="form-control" name="email" id="email">
-	</div>
-	
-	<div class="col-md-12">
-		<label for="comments" class="form-label">Comments,Questions?</label>
-         <textarea class="form-control" id="comments" rows="3"></textarea>
-	</div>
-	<div class="col-md-12 py-3 px-5 justify-content-center">
-		<button type="submit" class="btn btn-primary py-3 px-5 ">Send</button>
-	</div>
-      </form>
-   </div>
-
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" name="username" id="username">
+    </div>
+    <div class="col-md-6">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email">
+    </div>
+    <div class="col-md-12">
+      <label for="comments" class="form-label">Comments, Questions?</label>
+      <textarea class="form-control" name="comments" id="comments" rows="3"></textarea>
+    </div>
+    <div class="col-md-12 py-3 px-5 justify-content-center">
+      <button type="submit" class="btn btn-primary py-3 px-5">Send</button>
+    </div>
+  </form>
+</div>
 
 
  
@@ -582,70 +580,75 @@
   <script src="js/main.js"></script>
   <script type="text/javascript" src="script.js"></script>
 
-  <script>
-function validate(event) {
-  event.preventDefault();
+  <!-- EmailJS SDK already included in your head (you have it).-->
+<script>
+  
 
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const comments = document.getElementById("comments").value.trim();
+  function validate(event) {
+    event.preventDefault();
 
-  // Basic validation
-  if (username === "") {
-    alert("Must have a username");
-    document.getElementById("username").focus();
-    return false;
-  }
+    // Read values
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const comments = document.getElementById("comments").value.trim();
 
-  if (email === "") {
-    alert("Must have an Email ID");
-    document.getElementById("email").focus();
-    return false;
-  }
-
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/i;
-  if (!emailPattern.test(email)) {
-    alert("Please enter a valid Email ID");
-    document.getElementById("email").focus();
-    return false;
-  }
-
-  if (comments === "") {
-    alert("Please Enter a Message");
-    document.getElementById("comments").focus();
-    return false;
-  }
-
-  // ✅ If all inputs valid → Submit to Google Sheet
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwLdgLmYMGs1OYwCnKEGTwbwakTriYhje86QDAqjntSlEaQfJybfvy0ehYw-ARF-HQV/exec";
-  const form = document.forms["gform"];
-
-  fetch(scriptURL, { method: "POST", body: new FormData(form) })
-    .then(response => {
-      alert("✅ Form submitted successfully!");
-      form.reset();
-
-      //  Send yourself an email using EmailJS
-      emailjs.send("service_xun9tq3", "template_t2gtmrt", {
-      
-        from_name: username,
-        from_email: email,
-        message: comments
-      })
-      .then(() => {
-        console.log("📧 Email sent successfully!");
-      })
-      .catch(err => {
-        console.error("EmailJS Error:", err);
-      });
-    })
-    .catch(error => {
-      alert("❌ Something went wrong! " + error.message);
-    });
-
+    // --- Validation (your existing checks) ---
+    if (username === "") {
+  alert("Must have a username");
+  document.getElementById("username").focus();
   return false;
 }
+
+const namePattern = /^[A-Za-z\s]+$/;
+if (!namePattern.test(username)) {
+  alert("Username must contain only letters (no numbers or special characters).");
+  document.getElementById("username").focus();
+  return false;
+}
+    if (email === "") {
+      alert("Must have an Email ID");
+      document.getElementById("email").focus();
+      return false;
+    }
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/i;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid Email ID");
+      document.getElementById("email").focus();
+      return false;
+    }
+
+    if (comments === "") {
+      alert("Please Enter a Message");
+      document.getElementById("comments").focus();
+      return false;
+    }
+
+
+    const SERVICE_ID  = "service_xun9tq3";   
+    const TEMPLATE_ID = "template_t2gtmrt"; 
+
+    
+    emailjs.send("service_xun9tq3", "template_t2gtmrt", {
+      username: username,
+      email: email,
+      comments: comments
+    })
+    .then(function(response) {
+      alert("✅ Form submitted successfully! Email sent.");
+      // Reset form
+      document.forms["gform"].reset();
+    })
+    .catch(function(err) {
+      console.error("EmailJS error:", err);
+      alert("❌ Failed to send email. Please try again later.");
+    });
+
+    return false;
+  }
 </script>
+
+  
 
   
 
