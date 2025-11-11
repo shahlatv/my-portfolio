@@ -523,26 +523,40 @@
    </div>
  </section>
 
-   <div class="container mt-5">
+  <div class="container mt-5">
   <h1>ENQUIRIES</h1>
   <form name="gform" id="contact-form" onsubmit="return validate(event)">
-    <div class="col-md-12">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" name="username" id="username">
+    
+    <div class="row">
+      <!-- Username field -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" name="username" id="username">
+      </div>
+
+      <!-- Email field -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email">
+      </div>
     </div>
-    <div class="col-md-12">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" name="email" id="email">
+
+    <!-- Comments field -->
+    <div class="row">
+      <div class="col-12 mb-3">
+        <label for="comments" class="form-label">Comments, Questions?</label>
+        <textarea class="form-control" name="comments" id="comments" rows="3"></textarea>
+      </div>
     </div>
-    <div class="col-md-12">
-      <label for="comments" class="form-label">Comments, Questions?</label>
-      <textarea class="form-control" name="comments" id="comments" rows="3"></textarea>
-    </div>
-    <div class="col-md-12 py-3 px-5 justify-content-center">
+
+    <!-- Submit button -->
+    <div class="text-center">
       <button type="submit" class="btn btn-primary py-3 px-5">Send</button>
     </div>
+
   </form>
 </div>
+
 
 
  
